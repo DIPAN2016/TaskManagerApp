@@ -1,0 +1,120 @@
+<div class="pb-2 mt-4 mb-2 border-bottom">
+  <h1>View Tasks</h1>
+</div>
+<form>
+  <div class="form-row form-inline ">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="task_Name" class="col-md-3 col-form-label"><strong>Task</strong></label>
+        <div class="col-md-9">
+          <input type="text" class="col-md-12" id="task_Name" placeholder="Task Name" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="parenttask_Name" class="col-md-3 col-form-label"><strong>Parent Task</strong></label>
+        <div class="col-md-8">
+          <input type="text" class="col-md-12" id="parenttask_Name" placeholder="Parent Task" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row form-inline">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="priorityFrom" class="col-md-6 col-form-label"><strong>Priority From</strong></label>
+        <div class="col-md-6">
+          <input type="text" class="col-md-12" id="priorityFrom" placeholder="0" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="priorityTo" class="col-sm-6 col-form-label"><strong>Priority To</strong></label>
+        <div class="col-sm-6">
+          <input type="text" class="col-md-12" id="priorityTo" placeholder="30" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="startDate" class="col-sm-5 col-form-label start-end-date-label"><strong>Start Date</strong></label>
+        <div class="col-sm-7 date-time-div">
+          <input type="date" class="form-control datetextboxwidth" id="startDate" placeholder="Start Date" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="endDate" class="col-sm-5 col-form-label start-end-date-label"><strong>End Date</strong></label>
+        <div class="col-sm-7 date-time-div">
+          <input type="date" class="form-control datetextboxwidth" id="endDate" placeholder="End Date" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group search-tasks-form">
+        <button class="btn btn-secondary btn-md" (click)="onSearchTaskClick()">Search Tasks</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<table class="table" *ngIf='tasks && tasks.length'>
+  <thead>
+    <tr>
+      <th class="d-none">
+      </th>
+      <th>
+        Task
+      </th>
+      <th>
+        Parent
+      </th>
+      <th>
+        Priority
+      </th>
+      <th>
+        Start
+      </th>
+      <th>
+        End
+      </th>
+      <th class="d-none">
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let task of tasks'>
+      <td class="d-none">{{task.TaskId}}</td>
+      <td>
+        <div class="card" style="width: 12rem;background:lightgrey;">
+          <div class="card-body">{{task.Task}}</div>
+        </div>
+      </td>
+      <td><span class="d-none">{{task.ParentTask_ID}}</span>
+        <div class="card" style="width: 12rem;background:lightgrey;">
+          <div class="card-body">{{task.ParentTask}}</div>
+        </div>
+      </td>
+      <td>{{task.Priority}}</td>
+      <td>{{task.StartDate | date:'dd/MM/yyyy'}}</td>
+      <td>{{task.EndDate | date:'dd/MM/yyyy'}}</td>
+      <td class="d-none">{{task.Status}}</td>
+      <td>
+        <div class="form-group">
+          <div class="form-group">
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/update',task]"
+              routerLinkActive="router-link-active">Edit</button> |
+            <button class="btn btn-secondary btn-sm">End Task</button> |
+            <button class="btn btn-warning btn-sm" (click)="onDeleteClick(task)">Delete</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<router-outlet></router-outlet>

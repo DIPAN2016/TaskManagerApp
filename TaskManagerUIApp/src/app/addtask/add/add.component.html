@@ -1,0 +1,48 @@
+<div class="pb-2 mt-4 mb-2 border-bottom">
+  <h3>Add Task</h3>
+</div>
+<form #addtaskform="ngForm" (ngSubmit)="onSubmit(addtaskform,addtaskform.value)">
+  <div class="form-group row">
+    <label for="taskName" class="col-sm-2 col-form-label"><strong>Task:</strong></label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="taskName" placeholder="Task name" name="taskDetail"
+        #taskDetail='ngModel' ngModel required />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"><strong>Priority:</strong></label>
+
+    <div class="col-sm-9">
+      <input type="range" class="custom-range" max="30" min="0" id="formControlRange" name="priority" #priority='ngModel' ngModel
+        required>
+    </div>
+
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"><strong>Parent Task:</strong></label>
+    <div class="col-sm-7 ">
+      <input type="text" class="form-control" name='parentTask' #parentTask="ngModel" ngModel required
+        [(ngModel)]="prntTask" placeholder="Parent Task" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="startDate" class="col-sm-2 col-form-label"><strong>Start Date:</strong></label>
+    <div class="col-sm-4">
+      <input type="date" id="startDate" class="form-control datetextboxwidth" placeholder="start date" name="startDate"
+        #startDate='ngModel' ngModel required />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="endDate" class="col-sm-2 col-form-label"><strong>End Date:</strong></label>
+    <div class="col-sm-4">
+      <input type="date" id="endDate" class="form-control datetextboxwidth" placeholder="end date" name="endDate"
+        #endDate='ngModel' ngModel required />
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <button type="submit" id="btnaddproject" class="btn btn-primary mr-2 butbackcolcor">Add Task</button>
+      <button type="button" class="btn btn-secondary butbackcolcor" (click)='onResetClick(addtaskform)'>Reset</button>
+    </div>
+  </div>
+</form>
